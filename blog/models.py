@@ -1,7 +1,5 @@
 from django.db import models
 from django.utils.text import slugify
-from prose.fields import RichTextField
-from prose.models import Document
 
 
 class Category(models.Model):
@@ -34,13 +32,14 @@ class Post(models.Model):
     category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
     # A separate image that is displayed as the main image of the post
     main_image = models.ImageField(upload_to="uploads/%Y/%m/%d/", null=True, blank=True)
-    # A short "teaser", typically used on the home page where many posts are shown - uses django-prose
-    excerpt = RichTextField(blank=True, null=True)
-    # The main content of the blog post - uses django-prose
-    body = models.OneToOneField(Document, on_delete=models.CASCADE)
+    # The main content of the blog post
+    content = models.TextField()
 
     def __str__(self):
-        return self.title
+        if self.publish_date:
+            return f"{self.publish_date:%Y-%m-%d}: {self.title}"
+
+        return f"(DRAFT) {self.title}"
 
     def save(self, *args, **kwargs):
         if not self.slug:

@@ -16,7 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from filebrowser.sites import site
 
 urlpatterns = [
+    path('admin/filebrowser/', site.urls),  # Used by: Blog
     path('admin/', admin.site.urls),
+    path('tinymce/', include('tinymce.urls')),  # Used by: Blog
 ]
