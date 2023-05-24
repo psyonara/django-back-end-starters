@@ -1,5 +1,5 @@
 """
-WSGI config for model_starters project.
+WSGI config for back_end_starters project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'model_starters.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'back_end_starters.settings')
 
 application = get_wsgi_application()
